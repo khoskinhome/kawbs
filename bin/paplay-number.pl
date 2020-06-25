@@ -24,7 +24,7 @@ sub play_number {
         die "$i out of range 0 to 299\n";
     }
 
-    if ( -f wav_file($i) ) {
+    if ( wav_file($i) ) {
         paplay_numbers($i);
         return;
     }
