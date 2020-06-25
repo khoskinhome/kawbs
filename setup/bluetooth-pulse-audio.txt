@@ -1,0 +1,5 @@
+There are a few of issues with bluetooth and pulseaudio and alsa.
+
+I had a lot of challenges getting bluetooth to work on a Pi.
+
+
