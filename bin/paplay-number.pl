@@ -9,11 +9,11 @@ our $INVALID_WAV_FILE = "${AUDIO_DIR}/invalid-wav-file.wav";
 # in cli , and it will work out the
 # files to paplay
 
-my $i = $ARGV[0];
-chomp ($i);
-die "'$i' is not an integer\n" if $i !~ /^\d+$/;
-
-play_number($i) ;
+for my $i (@ARGV){
+    chomp ($i);
+    die "'$i' is not an integer\n" if $i !~ /^\d+$/;
+    play_number($i) ;
+}
 
 sub play_number {
     my ($i) = @_;
