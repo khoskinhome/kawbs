@@ -1,9 +1,19 @@
 #!/usr/bin/perl
 use strict; use warnings;
-sub true  {1};
-sub false {0};
-our $AUDIO_DIR = "/opt/kawbs/audio/english-karl/";
-our $INVALID_WAV_FILE = "${AUDIO_DIR}/invalid-wav-file.wav";
+
+use lib '/opt/kawbs/lib/perl';
+
+use KAWBS::Constants qw(
+    true false
+    $AUDIO_DIR
+    $INVALID_WAV_FILE
+);
+
+
+#sub true  {1};
+#sub false {0};
+#our $AUDIO_DIR = "/opt/kawbs/audio/english-karl/";
+#our $INVALID_WAV_FILE = "${AUDIO_DIR}/invalid-wav-file.wav";
 
 # give it a number 0 to 299
 # in cli , and it will work out the
