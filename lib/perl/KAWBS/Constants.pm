@@ -44,5 +44,66 @@ sub log_error($){ warn "ERROR : $_[0]\n"}
 sub log_warn ($){ warn "WARN  : $_[0]\n"}
 sub log_debug($){ warn "DEBUG : $_[0]\n"}
 
+sub number_wavs_compulsory (){
+    return qw(
+        0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19
+        20 30 40 50 60 70 80 90 100 100-and 200 200-and
+    );
+}
+
+sub number_wav_nice_to_have (){
+    return qw(
+        22 32 42 52 62 72 82 92
+        24 34 44 54 64 74 84 94
+        25 35 45 55 65 75 85 95
+        26 36 46 56 66 76 86 96
+        28 38 48 58 68 78 88 98
+
+        122 132 142 152 162 172 182 192
+        124 134 144 154 164 174 184 194
+        125 135 145 155 165 175 185 195
+        126 136 146 156 166 176 186 196
+        128 138 148 158 168 178 188 198
+
+        222 232 242 252 262 272 282 292
+        224 234 244 254 264 274 284 294
+        225 235 245 255 265 275 285 295
+        226 236 246 256 266 276 286 296
+        228 238 248 258 268 278 288 298
+    );
+}
+
+sub word_wav_compulsory (){
+    return qw(
+        alerts-off alerts-on
+        speed-off speed-on
+        wifi-off wifi-on
+        connected
+        invalid-wav-file
+
+        a-b-s battery brakes-warning brakes
+        engine-temperature engine-warning
+
+        first second  third  fourth fifth
+        sixth seventh eighth nineth tenth
+        gear-too-high
+
+        kilometres-per-hour k-p-h
+        miles-per-hour m-p-h
+
+        left right relay-click
+
+        low-fuel
+        not-charging
+        oil-pressure
+        silence
+        speed-camera
+        temperature-warning temperature
+        too-fast
+        tyre-pressure tyres
+        unknown-warning warning
+    );
+}
+
 1;
 
