@@ -22,8 +22,12 @@ sub play_wavs {
     # "invalid wav file" will be played just once
     # for the entire list.
     # You need to look in the logs to see what wav files are missing.
-
-    my @wav_words = @_;
+    my $str = join( " " , @_);
+    $str =~ s/^\s+//g;
+    $str =~ s/\s+$//g;
+    my @wav_words = split(/\s+/,$str);
+    use Data::Dumper;
+    print Dumper (\@wav_words);
 
     my $cmd = "";
     my $invalid_wav = false;

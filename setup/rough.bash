@@ -6,7 +6,6 @@
 sudo usermod -G bluetooth -a pi
 sudo apt -y purge "pulseaudio*"
 
-
 # follow this :
 #https://peppe8o.com/fixed-connect-bluetooth-headphones-with-your-raspberry-pi/
 
@@ -111,6 +110,7 @@ sudo apt -y purge "pulseaudio*"
 
 sudo apt-get install bluealsa -y
 
+
 sudo apt-get install mosquitto mosquitto-clients -y
 # TODO need to get mosquitto to start on boot.
 # so some line in here to configure start on boot.
@@ -118,8 +118,9 @@ sudo apt-get install mosquitto mosquitto-clients -y
 
 sudo apt-get install -y cpanminus -y
 
-sudo cpanm Net::MQTT::Simple
-
+sudo cpanm Net::MQTT::Simple -y
+sudo cpanm JSON AnyEvent::MQTT -y
+sudo cpanm AnyEvent::MQTT -y
 
 sudo mkdir -p /opt/kawbs
 sudo chown pi.pi /opt/kawbs

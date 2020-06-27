@@ -1,6 +1,5 @@
 #!/usr/bin/perl
 use strict; use warnings;
-
 use lib '/opt/kawbs/lib/perl';
 
 use KAWBS::PlayWav qw(

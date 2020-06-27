@@ -11,6 +11,7 @@ our @EXPORT_OK = qw(
 
     AUDIO_DIR_DEFAULT
     INVALID_WAV_FILE
+    $KAWBS_PLAYED_MQTT_TOPIC
 );
 
 sub true  (){1};
@@ -36,6 +37,8 @@ sub false (){0};
         $aud_dir = $dir;
     }
 }
+
+our $KAWBS_PLAYED_MQTT_TOPIC="played";
 
 sub INVALID_WAV_FILE {  get_audio_dir()."invalid-wav-file.wav" };
 
