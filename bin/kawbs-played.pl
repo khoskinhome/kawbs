@@ -33,6 +33,8 @@ push @w , $mqtt->subscribe(
         # some massive integer is a lower priority
         # only accepts integers.
 
+        # TODO could work the priority out from the words here !!!
+
         if ( my ($prio, $play)= $message =~ /^\s*(\d+)\s*:(.*)$/){
             push @$play_queue, {
                 priority => $prio,

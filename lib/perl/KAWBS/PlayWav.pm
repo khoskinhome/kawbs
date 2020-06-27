@@ -14,6 +14,8 @@ use KAWBS::Constants qw(
     INVALID_WAV_FILE
 );
 
+use Try::Tiny;
+
 sub play_wavs {
     # accepts a list of word/phrases or numbers.
     # They should all be played with just one call to "system"
@@ -34,7 +36,15 @@ sub play_wavs {
 
         my $play_list = [];
         if ( $w =~ /^\d+$/ ){
-            $play_list = _get_numbers($w)
+
+            try {
+                $play_list = _get_numbers($w)
+            } catch {
+                # TODO really need to play a
+                # "number out of range"
+                $invalid_wav = true;
+
+            }
         } else {
             $play_list->[0] = $w;
         }
@@ -111,7 +121,20 @@ sub _get_numbers {
 
     $i = $i + 0;
 
-    if ($i <0 or $i > 299){
+    if ($i <0 or $i > 20000){
+        log_fatal "$i out of range 0 to 20000\n";
+    }
+
+    if ($i > 499){
+        # assuming to be the 500 rpm increments for rpm
+
+        my $trunc_i = sprintf("%.0f", $i/500)*500;
+        return [$trunc_i];
+    }
+
+
+    # Assuming to be 0 to 299 for kph / mph.
+    if ( $i > 299 ) {
         log_fatal "$i out of range 0 to 299\n";
     }
 

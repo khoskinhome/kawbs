@@ -109,7 +109,11 @@ sub word_wav_compulsory (){
     );
 }
 
+# Define the word priority here.
 # 0 is for the highest priority words
+#
+# A phrase gets it's priority from the highest priority
+# word/phrase.
 sub word_priority () {
     return {
          5 => [qw(
@@ -140,6 +144,7 @@ sub word_priority () {
             first second  third  fourth fifth
             sixth seventh eighth nineth tenth
             gear-too-high
+            gear
 
         )],
         50 => [qw(
@@ -149,6 +154,17 @@ sub word_priority () {
         )],
     };
 }
+
+
+#{
+#    my $word
+#
+#
+#
+#
+#
+#}
+#
 
 1;
 
