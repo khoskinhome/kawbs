@@ -3,17 +3,14 @@ use strict; use warnings;
 
 use lib '/opt/kawbs/lib/perl';
 
-use KAWBS::Constants qw(
-    true false
-    $AUDIO_DIR
-    $INVALID_WAV_FILE
+use KAWBS::PlayWav qw(
+    play_wav
+    wav_file
 );
 
-
-#sub true  {1};
-#sub false {0};
-#our $AUDIO_DIR = "/opt/kawbs/audio/english-karl/";
-#our $INVALID_WAV_FILE = "${AUDIO_DIR}/invalid-wav-file.wav";
+use KAWBS::Constants qw(
+    true false
+);
 
 # give it a number 0 to 299
 # in cli , and it will work out the
@@ -35,13 +32,13 @@ sub play_number {
     }
 
     if ( wav_file($i) ) {
-        paplay_numbers($i);
+        play_wav($i);
         return;
     }
 
     my $hundreds = int($i/100)*100;
     if ($hundreds == $i){
-        paplay_numbers($i);
+        play_wav($i);
         return;
     }
 
@@ -67,27 +64,6 @@ sub play_number {
         }
     }
 
-    paplay_numbers(@play);
+    play_wav(@play);
 }
 
-sub wav_file {
-    my ($i) = @_;
-    my $filename = "$AUDIO_DIR/$i.wav";
-    return $filename if -f $filename;
-    return;
-}
-
-sub paplay_numbers {
-    my @nums = @_;
-
-    my $cmd ="";
-    for my $n ( @nums ){
-        if (my $file = wav_file($n)){
-            $cmd .= "paplay  $file;";
-        } else {
-            system("paplay $INVALID_WAV_FILE");
-            die "Can't find $n.wav\n";
-        }
-    }
-    system($cmd);
-}
