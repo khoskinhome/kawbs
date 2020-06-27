@@ -82,7 +82,7 @@ sudo apt -y purge "pulseaudio*"
 # ###### dtparam=audio=on
 #############################################
 
-# Need to get bluealso running with 
+# Need to get bluealso running with
 ## --a2dp-keep-alive=SEC	keep A2DP transport alive
 ## --a2dp-keep-alive=120	keep A2DP transport alive
 # to hopefully stop some of the clicks between playing
@@ -99,7 +99,7 @@ sudo apt -y purge "pulseaudio*"
 # https://github.com/Arkq/bluez-alsa/issues/171
 #https://askubuntu.com/questions/1037370/ubuntu-18-04-bluetooth-device-disconnects-right-after-connect-on-lenovo-p50
 #  sudo vim /etc/pulse/default.pa
-# 
+#
 #  sudo vim /etc/bluetooth/main.conf
 #  sudo vim /etc/pulse/daemon.conf
 #
