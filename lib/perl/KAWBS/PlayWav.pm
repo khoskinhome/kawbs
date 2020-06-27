@@ -26,8 +26,6 @@ sub play_wavs {
     $str =~ s/^\s+//g;
     $str =~ s/\s+$//g;
     my @wav_words = split(/\s+/,$str);
-    use Data::Dumper;
-    print Dumper (\@wav_words);
 
     my $cmd = "";
     my $invalid_wav = false;

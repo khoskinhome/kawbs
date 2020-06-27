@@ -18,6 +18,8 @@ sub true  (){1};
 sub false (){0};
 
 {
+    # TODO this really needs to read in from
+    # a config file.
     sub AUDIO_DIR_DEFAULT (){"/opt/kawbs/audio/english-karl/"};
 
     my $aud_dir = AUDIO_DIR_DEFAULT();
@@ -86,26 +88,66 @@ sub word_wav_compulsory (){
 
         a-b-s battery brakes-warning brakes
         engine-temperature engine-warning
-
-        first second  third  fourth fifth
-        sixth seventh eighth nineth tenth
-        gear-too-high
-
-        kilometres-per-hour k-p-h
-        miles-per-hour m-p-h
-
-        left right relay-click
-
-        low-fuel
         not-charging
         oil-pressure
-        silence
         speed-camera
         temperature-warning temperature
         too-fast
         tyre-pressure tyres
         unknown-warning warning
+
+        kilometres-per-hour k-p-h
+        miles-per-hour m-p-h
+
+        first second  third  fourth fifth
+        sixth seventh eighth nineth tenth
+        gear-too-high
+
+        silence
+        low-fuel
+        left right relay-click
     );
+}
+
+# 0 is for the highest priority words
+sub word_priority () {
+    return {
+         5 => [qw(
+            connected
+            invalid-wav-file
+        )],
+        10 => [qw(
+            alerts-on alerts-off
+            speed-on speed-off
+            wifi-off wifi-on
+        )],
+        20 => [qw(
+            a-b-s battery brakes-warning brakes
+            engine-temperature engine-warning
+            not-charging
+            oil-pressure
+            speed-camera
+            temperature-warning temperature
+            too-fast
+            tyre-pressure tyres
+            unknown-warning warning
+        )],
+        30 => [qw(
+            kilometres-per-hour k-p-h
+            miles-per-hour m-p-h
+        )],
+        40 => [qw(
+            first second  third  fourth fifth
+            sixth seventh eighth nineth tenth
+            gear-too-high
+
+        )],
+        50 => [qw(
+            silence
+            low-fuel
+            left right relay-click
+        )],
+    };
 }
 
 1;

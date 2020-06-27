@@ -2,6 +2,7 @@
 use strict; use warnings;
 use lib '/opt/kawbs/lib/perl';
 
+use Data::Dumper;
 use AnyEvent;
 use AnyEvent::MQTT;
 
@@ -38,7 +39,7 @@ push @w , $mqtt->subscribe(
                 play => $play,
             };
             # sort the queue.
-            @$play_queue = sort { $a->{priority} <=> $b->{priority} }
+            @$play_queue = sort { $b->{priority} <=> $a->{priority} }
                              @$play_queue;
 
         } else {
@@ -52,6 +53,7 @@ push @w , AnyEvent->timer (
    interval => .05,
    cb    => sub {
         if (@$play_queue > 0){
+            log_debug("play queue is :\n". Dumper ($play_queue));
             my $que = pop @$play_queue;
             # print "timer_cb $que\n";
             play_wavs($que->{play}) ;
