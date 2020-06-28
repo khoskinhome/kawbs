@@ -1,6 +1,17 @@
 package KAWBS::Constants;
 use strict; use warnings;
 
+# Karl Hoskin . 2020.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# Artistic License 2.0 for more details.
+#
+# You should have received a copy of the Artistic License 2.0 along
+# with this program in the file named LICENSE. If not, please see
+# <http://www.perlfoundation.org/artistic_license_2_0>.
+
 use Exporter 'import';
 
 our @EXPORT_OK = qw(
@@ -109,6 +120,8 @@ sub word_wav_compulsory (){
         first second  third  fourth fifth
         sixth seventh eighth nineth tenth
         gear-too-high
+
+        hundred thousand and
 
         silence
         low-fuel
