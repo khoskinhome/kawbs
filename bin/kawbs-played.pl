@@ -11,6 +11,7 @@ use KAWBS::PlayWav qw(
 );
 
 use KAWBS::Constants qw(
+    get_words_priority
     $KAWBS_PLAYED_MQTT_TOPIC
     log_fatal log_error log_warn log_debug
 );
@@ -26,27 +27,19 @@ push @w , $mqtt->subscribe(
     topic =>$KAWBS_PLAYED_MQTT_TOPIC,
     callback => sub {
         my ($topic, $message) = @_;
-        print $topic, ' ', $message, "\n";
-        # format of message is
-        # numeric priority : space separated list of wav file names (minus .wav)
-        # 0 is highest priority.
-        # some massive integer is a lower priority
-        # only accepts integers.
+        log_debug("received $topic : $message \n");
 
-        # TODO could work the priority out from the words here !!!
+        # format of message is a space separated list of
+        # numbers and words to play
 
-        if ( my ($prio, $play)= $message =~ /^\s*(\d+)\s*:(.*)$/){
-            push @$play_queue, {
-                priority => $prio,
-                play => $play,
-            };
-            # sort the queue.
-            @$play_queue = sort { $b->{priority} <=> $a->{priority} }
-                             @$play_queue;
+        my $prio =  get_words_priority($message);
+        push @$play_queue, {
+            priority => $prio,
+            play => $message,
+        };
 
-        } else {
-            log_error("played.pl : bad format message :\n$message\n");
-        }
+        @$play_queue = sort { $b->{priority} <=> $a->{priority} }
+                         @$play_queue;
     }
 );
 

@@ -6,6 +6,7 @@ use Exporter 'import';
 our @EXPORT_OK = qw(
     true false
     get_audio_dir
+    get_words_priority
 
     log_fatal log_error log_warn log_debug
 
@@ -109,13 +110,15 @@ sub word_wav_compulsory (){
     );
 }
 
-# Define the word priority here.
-# 0 is for the highest priority words
-#
-# A phrase gets it's priority from the highest priority
-# word/phrase.
-sub word_priority () {
-    return {
+
+{
+    # Define the word priority here.
+    # 0 is for the highest priority words
+    #
+    # A phrase gets it's priority from the highest priority
+    # word/phrase.
+
+    my $wp = {
          5 => [qw(
             connected
             invalid-wav-file
@@ -140,6 +143,9 @@ sub word_priority () {
             kilometres-per-hour k-p-h
             miles-per-hour m-p-h
         )],
+        35 => [qw(
+            r-p-m revolutions-per-minute
+        )],
         40 => [qw(
             first second  third  fourth fifth
             sixth seventh eighth nineth tenth
@@ -153,18 +159,33 @@ sub word_priority () {
             left right relay-click
         )],
     };
+
+    my $word_prio_lookup = { };
+
+    for my $prio (keys %{$wp}){
+        for my $w ( @{$wp->{$prio}} ){
+            $word_prio_lookup->{$w} = $prio;
+        }
+    }
+
+    sub get_words_priority {
+        my $str = join( " " , @_);
+        $str =~ s/^\s+//g;
+        $str =~ s/\s+$//g;
+
+        my $prio = 999999999999999;
+
+        for my $w ( split(/\s+/,$str) ){
+            if (exists $word_prio_lookup->{$w} &&
+                $word_prio_lookup->{$w} < $prio
+            ){
+                $prio = $word_prio_lookup->{$w};
+            }
+        }
+
+        return $prio;
+    }
 }
-
-
-#{
-#    my $word
-#
-#
-#
-#
-#
-#}
-#
 
 1;
 
