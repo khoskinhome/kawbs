@@ -122,6 +122,7 @@ sudo apt-get install -y cpanminus -y
 sudo cpanm Net::MQTT::Simple -y
 sudo cpanm JSON AnyEvent::MQTT -y
 sudo cpanm AnyEvent::MQTT -y
+sudo cpanm Device::SerialPort -y
 
 sudo mkdir -p /opt/kawbs
 sudo chown pi.pi /opt/kawbs

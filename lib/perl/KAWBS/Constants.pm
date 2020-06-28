@@ -113,6 +113,7 @@ sub word_wav_compulsory (){
         too-fast
         tyre-pressure tyres
         unknown-warning warning
+        o-b-d-error
 
         kilometres-per-hour k-p-h
         miles-per-hour m-p-h
@@ -158,6 +159,7 @@ sub word_wav_compulsory (){
             too-fast
             tyre-pressure tyres
             unknown-warning warning
+            o-b-d-error
         )],
         30 => [qw(
             kilometres-per-hour k-p-h
