@@ -121,6 +121,7 @@ sub word_wav_compulsory (){
         sixth seventh eighth nineth tenth
         gear-too-high
 
+        number-out-of-range
         hundred thousand and
 
         silence
