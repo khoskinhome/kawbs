@@ -2,6 +2,7 @@
 
 # switch off wifi :
 #  sudo iwconfig wlan0 txpower off
+# https://raspberrypi.stackexchange.com/questions/43720/disable-wifi-wlan0-on-pi-3
 
 sudo usermod -G bluetooth -a pi
 sudo apt -y purge "pulseaudio*"
