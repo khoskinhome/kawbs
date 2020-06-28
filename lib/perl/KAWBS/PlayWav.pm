@@ -121,21 +121,23 @@ sub _get_numbers {
 
     $i = $i + 0;
 
-    if ($i <0 or $i > 20000){
+    if ( $i !~ /^\d+$/){
+        log_fatal "$i is not an integer\n";
+    }
+
+    if ( $i < 0 or $i > 20000 ){
         log_fatal "$i out of range 0 to 20000\n";
     }
 
-    if ($i > 499){
-        # assuming to be the 500 rpm increments for rpm
+    # above 399 assume it's an RPM , so rounded 500 increments only.
+    # 399 and below assume it's a speed in kph or mph and
+    # try to accurately say the number.
 
+    if ($i > 399){
+        # TODO . maybe to the closest 200 or 100 ?
+        # assuming to be the 500 rpm increments for rpm
         my $trunc_i = sprintf("%.0f", $i/500)*500;
         return [$trunc_i];
-    }
-
-
-    # Assuming to be 0 to 299 for kph / mph.
-    if ( $i > 299 ) {
-        log_fatal "$i out of range 0 to 299\n";
     }
 
     if ( wav_file($i) ) {
