@@ -1,0 +1,11 @@
+{
+    "port" : {
+        "device":"/dev/ttyUSB0",
+        "baud":500000,
+        "databits":8,
+        "stopbits":1,
+        "parity":"none",
+        "handshake":"none"
+    }
+}
+

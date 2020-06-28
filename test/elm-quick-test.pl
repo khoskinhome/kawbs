@@ -1,15 +1,45 @@
 #!/usr/bin/perl -w
 use strict; use warnings;
+use Device::ELM327;
 
-use Device::SerialPort;
+my $device    = '/dev/ttyUSB0';	# default serial port for UNIX-like systems
+my $baudrate  = 500000;
+my $databits  = 8;
+my $stopbits  = 1;
+my $parity    = 'none';
+my $handshake = 'none';
+
+my $pid_cfg = {
+    0x01 => {
+        0x00 => {
+            name => "PIDs Supported",
+            conv => sub { },
+        },
+        0x01 => {
 
 
-my $def_device    = '/dev/ttyS0';	# default serial port for UNIX-like systems
-my $def_baudrate  = 500000;
-my $def_databits  = 8;
-my $def_stopbits  = 1;
-my $def_parity    = 'none';
-my $def_handshake = 'none';
+        },
+
+
+
+
+
+
+    }
+};
+
+my $port_details = "$device:$baudrate:$parity:$databits:$stopbits:$handshake";
+print "connect with :\n  $port_details\n";
+
+my $obd = Device::ELM327->new($port_details);
+
+if ( $obd->PortOk() ){
+    print "port is okay\n";
+} else {
+    print "port is NOT okay\n";
+}
+
+
 
 
 
@@ -29,7 +59,25 @@ my $def_handshake = 'none';
 #}
 #
 #
-#  $port = new Device::SerialPort($device)
-#    || msg_f("error opening serial device: $device\n", $EXIT_OPEN_PORT_ERROR);
+#my $port = new Device::SerialPort($device)
+#    || die "error opening serial dev $device $!\n";
 #
+## baud rate
+#$baudrate = $port->baudrate($baudrate);
 #
+## databits
+#$databits = $port->databits($databits);
+#
+## parity
+#$parity = $port->parity($parity);
+#
+## stopbits
+#$stopbits = $port->stopbits($stopbits);
+#
+## handshaking
+#$handshake = $port->handshake($handshake);
+#
+## write settings
+#$port->write_settings()
+#    || die("error connectiong to serial port\n");
+##

@@ -123,6 +123,8 @@ sudo cpanm Net::MQTT::Simple -y
 sudo cpanm JSON AnyEvent::MQTT -y
 sudo cpanm AnyEvent::MQTT -y
 sudo cpanm Device::SerialPort -y
+sudo cpanm Device::ELM327
+
 
 sudo mkdir -p /opt/kawbs
 sudo chown pi.pi /opt/kawbs
@@ -131,6 +133,8 @@ mkdir -p /opt/kawbs/audio
 mkdir -p /opt/kawbs/lib/perl
 mkdir -p /opt/kawbs/bin
 mkdir -p /opt/kawbs/test
+
+mkdir -p /opt/kawbs/conf
 
 
 
