@@ -120,10 +120,12 @@ sudo apt-get install mosquitto mosquitto-clients -y
 sudo apt-get install -y cpanminus -y
 
 sudo cpanm Net::MQTT::Simple -y
-sudo cpanm JSON AnyEvent::MQTT -y
+sudo cpanm JSON -y
 sudo cpanm AnyEvent::MQTT -y
 sudo cpanm Device::SerialPort -y
-sudo cpanm Device::ELM327
+#sudo cpanm Device::ELM327
+
+#sudo apt install perltidy
 
 
 sudo mkdir -p /opt/kawbs

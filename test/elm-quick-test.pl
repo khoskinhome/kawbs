@@ -1,46 +1,43 @@
 #!/usr/bin/perl -w
 use strict; use warnings;
 use Device::ELM327;
+use Time::HiRes qw( usleep );
+use Data::Dumper;
 
-my $device    = '/dev/ttyUSB0';	# default serial port for UNIX-like systems
-my $baudrate  = 500000;
-my $databits  = 8;
-my $stopbits  = 1;
-my $parity    = 'none';
+
+# TODO die if not run as root. need root for serial connection.
+#
+#
+
+
+my $device = '/dev/ttyUSB0';	# default serial port for UNIX-like systems
+my $baudrate = 500000;
+my $databits = 8;
+my $stopbits = 1;
+my $parity = 'none';
 my $handshake = 'none';
 
-my $pid_cfg = {
-    0x01 => {
-        0x00 => {
-            name => "PIDs Supported",
-            conv => sub { },
-        },
-        0x01 => {
-
-
-        },
-
-
-
-
-
-
-    }
-};
-
 my $port_details = "$device:$baudrate:$parity:$databits:$stopbits:$handshake";
-print "connect with :\n  $port_details\n";
+print "connect with :\n $port_details\n";
 
 my $obd = Device::ELM327->new($port_details);
 
-if ( $obd->PortOk() ){
+if ( $obd->PortOK() ){
     print "port is okay\n";
+    print $obd->ShowReadableValues();
+    print "\n";
 } else {
-    print "port is NOT okay\n";
+    die "port is NOT okay\n";
 }
 
 
+my $value_name="Engine RPM";
+while (1) {
 
+    print Dumper($obd->Show($value_name))."\n";
+    usleep 200;
+
+}
 
 
 
@@ -60,7 +57,7 @@ if ( $obd->PortOk() ){
 #
 #
 #my $port = new Device::SerialPort($device)
-#    || die "error opening serial dev $device $!\n";
+# || die "error opening serial dev $device $!\n";
 #
 ## baud rate
 #$baudrate = $port->baudrate($baudrate);
@@ -79,5 +76,5 @@ if ( $obd->PortOk() ){
 #
 ## write settings
 #$port->write_settings()
-#    || die("error connectiong to serial port\n");
+# || die("error connectiong to serial port\n");
 ##
